@@ -1,40 +1,41 @@
-/* eslint-disable */
-
 import React from 'react';
-import dayGridPlugin from '@fullcalendar/daygrid'
-import FullCalendar from '@fullcalendar/react' 
-import interactionPlugin from "@fullcalendar/interaction"
+import dayGridPlugin from '@fullcalendar/daygrid';
+import FullCalendar from '@fullcalendar/react';
+import interactionPlugin from '@fullcalendar/interaction';
 
-function App () {
-  const [events, setEvents] = React.useState([
-    { title: 'event 1', date: '2023-04-01', number: 1 },
-    { title: 'event 2', date: '2023-04-02', number: 2 },
-  ])
+import { useEventsStore } from './store/eventsStore';
+import { AddEventModal } from './components/AddEventModal';
+import { DeleteEventModal } from './components/DeleteEventModal';
 
-  const getLastEvent = () => {
-    return events[events.length - 1].number
-  }
+function App() {
+  const [openAddEventModal, setOpenAddEventModal] = React.useState(false);
+  const [openDeleteEventModal, setOpenDeleteEventModal] = React.useState(false);
+  const [eventDate, setEventDate] = React.useState('');
+  const [deleteEventName, setDeleteEventName] = React.useState('');
 
   const handleEventClick = (arg) => {
-    if (confirm('delete')) {
-      setEvents((prevState) => {
-        return prevState.filter((event) => {
-          return event.title !== arg.event.title
-        })
-      })
-    }
-  }
+    setDeleteEventName(arg.event.title);
+    setOpenDeleteEventModal(true);
+  };
   const handleDateClick = (arg) => {
-    console.log('test')
-    if (confirm('add')) {
-      let number = getLastEvent() + 1
-      setEvents((prevState) => {
-        return [...prevState, { title: `event ${number}`, date: arg.dateStr, number }]
-      })
-    }
-  }
+    setEventDate(arg.dateStr);
+    setOpenAddEventModal(true);
+  };
+
+  const events = useEventsStore((state) => state.events);
+
   return (
-    <div className="App" style={{margin: '30px'}}>
+    <div className="App" style={{ margin: '30px' }}>
+      <AddEventModal
+        open={openAddEventModal}
+        setOpen={setOpenAddEventModal}
+        eventDate={eventDate}
+      />
+      <DeleteEventModal
+        open={openDeleteEventModal}
+        setOpen={setOpenDeleteEventModal}
+        eventName={deleteEventName}
+      />
       <FullCalendar
         plugins={[dayGridPlugin, interactionPlugin]}
         initialView="dayGridMonth"
@@ -42,7 +43,7 @@ function App () {
         eventClick={handleEventClick}
         dateClick={handleDateClick}
         height={400}
-        contentHeight='auto'
+        contentHeight="auto"
       />
     </div>
   );
