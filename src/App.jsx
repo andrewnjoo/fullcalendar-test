@@ -43,6 +43,9 @@ function App() {
         dateClick={handleDateClick}
         height={400}
         contentHeight="auto"
+        eventMouseEnter={(e) => {
+          e.el.style.cursor = 'pointer';
+        }}
       />
     </div>
   );
