@@ -12,6 +12,7 @@ function App() {
   const [openDeleteEventModal, setOpenDeleteEventModal] = React.useState(false);
   const [eventDate, setEventDate] = React.useState('');
   const [deleteEventName, setDeleteEventName] = React.useState('');
+  const events = useEventsStore((state) => state.events);
 
   const handleEventClick = (arg) => {
     setDeleteEventName(arg.event.title);
@@ -21,8 +22,6 @@ function App() {
     setEventDate(arg.dateStr);
     setOpenAddEventModal(true);
   };
-
-  const events = useEventsStore((state) => state.events);
 
   return (
     <div className="App" style={{ margin: '30px' }}>

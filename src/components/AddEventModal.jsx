@@ -5,21 +5,16 @@ import { useEventsStore } from '../store/eventsStore';
 
 export function AddEventInput({ eventName, setEventName }) {
   return (
-    <div className="my-6">
-      <div className="mt-1">
-        <label htmlFor="event" className="block text-sm font-medium text-gray-700">
-          Event description
-          <input
-            type="event"
-            name="event"
-            id="event"
-            className="border p-3 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-            placeholder="e.g. exercise"
-            value={eventName}
-            onChange={(e) => setEventName(e.target.value)}
-          />
-        </label>
-      </div>
+    <div className="my-6 mt-1">
+      <input
+        type="event"
+        name="event"
+        id="event"
+        className="border p-3 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+        placeholder="e.g. exercise"
+        value={eventName}
+        onChange={(e) => setEventName(e.target.value)}
+      />
     </div>
   );
 }
@@ -32,6 +27,7 @@ export function AddEventModal({ open, setOpen, eventDate }) {
     setOpen(false);
     setEventName('');
   };
+
   const handleSubmit = (e) => {
     e.preventDefault();
     addEvent({
@@ -39,7 +35,6 @@ export function AddEventModal({ open, setOpen, eventDate }) {
       date: eventDate,
     });
     setOpen(false);
-
     setEventName('');
   };
 

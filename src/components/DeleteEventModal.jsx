@@ -5,14 +5,17 @@ import { useEventsStore } from '../store/eventsStore';
 
 export function DeleteEventModal({ open, setOpen, eventName }) {
   const deleteEvent = useEventsStore((state) => state.deleteEvent);
+
   const handleClose = () => {
     setOpen(false);
   };
+
   const handleSubmit = (e) => {
     e.preventDefault();
     deleteEvent({ title: eventName });
     setOpen(false);
   };
+
   return (
     <Dialog open={open} onClose={handleClose} className="relative z-50">
       <div className="fixed inset-0 bg-black/30" aria-hidden="true" />
