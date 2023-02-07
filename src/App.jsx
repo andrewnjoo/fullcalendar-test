@@ -24,7 +24,8 @@ function App() {
   };
 
   return (
-    <div className="App" style={{ margin: '30px' }}>
+    <div className="my-6 mx-2 sm:mx-12">
+      <div className="flex justify-center text-3xl font-bold"> Minimal Journal</div>
       <AddEventModal
         open={openAddEventModal}
         setOpen={setOpenAddEventModal}
