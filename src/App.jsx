@@ -5,7 +5,7 @@ import interactionPlugin from '@fullcalendar/interaction';
 
 import { useEventsStore } from './store/eventsStore';
 import { AddEventModal } from './components/AddEventModal';
-import { DeleteEventModal } from './components/DeleteEventModal';
+import { EditEventModal } from './components/EditEventModal';
 
 function App() {
   const [openAddEventModal, setOpenAddEventModal] = React.useState(false);
@@ -31,10 +31,11 @@ function App() {
         setOpen={setOpenAddEventModal}
         eventDate={eventDate}
       />
-      <DeleteEventModal
+      <EditEventModal
         open={openDeleteEventModal}
         setOpen={setOpenDeleteEventModal}
         eventName={deleteEventName}
+        key={deleteEventName}
       />
       <FullCalendar
         plugins={[dayGridPlugin, interactionPlugin]}
